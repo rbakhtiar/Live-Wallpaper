@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Emerald Castle — Live Wallpaper</title>
 
-<!-- Alegreya Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -27,12 +24,13 @@ body {
 }
 
 body {
-    font-family: "Alegreya", Georgia, serif;
-    background: #010605;
-    color: #eafff5;
+    background: #010806;
+    font-family: "Alegreya", serif;
 }
 
-/* NIGHT SKY */
+/* =========================
+   SKY
+========================= */
 
 .sky {
     position: fixed;
@@ -40,91 +38,96 @@ body {
 
     background:
         radial-gradient(
-            circle at 50% 30%,
-            rgba(15, 91, 67, 0.25),
-            transparent 45%
+            ellipse at 50% 48%,
+            rgba(15, 92, 66, .25),
+            transparent 42%
         ),
         linear-gradient(
-            180deg,
-            #010504 0%,
-            #02120d 48%,
-            #031c14 100%
+            to bottom,
+            #010403 0%,
+            #03100c 42%,
+            #052219 73%,
+            #020b08 100%
         );
 }
 
-/* MOON */
+/* =========================
+   MOON
+========================= */
 
 .moon {
     position: absolute;
 
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
 
-    right: 13%;
     top: 13%;
+    right: 15%;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
-            circle at 35% 30%,
+            circle at 35% 32%,
             #f4fff9,
-            #cfeee0 55%,
-            #8eb8a6
+            #c7e6d8 55%,
+            #7da594 100%
         );
 
     box-shadow:
-        0 0 35px rgba(190,255,230,.18),
-        0 0 100px rgba(0,255,170,.08);
+        0 0 35px rgba(180,255,225,.18),
+        0 0 110px rgba(0,255,170,.08);
 
-    opacity: .82;
+    opacity: .78;
 }
 
-/* CLOUDS */
+/* =========================
+   CLOUDS
+========================= */
 
 .cloud {
     position: absolute;
 
-    width: 420px;
-    height: 100px;
-
-    background: rgba(8, 35, 27, .5);
-
-    filter: blur(20px);
+    width: 500px;
+    height: 90px;
 
     border-radius: 50%;
 
-    animation: cloudMove 30s linear infinite;
+    background: rgba(1,12,9,.55);
+
+    filter: blur(25px);
+
+    animation: clouds 42s linear infinite;
 }
 
-.cloud.one {
-    top: 22%;
-    left: -450px;
+.cloud.a {
+    top: 18%;
+    left: -550px;
 }
 
-.cloud.two {
-    top: 38%;
-    left: -600px;
+.cloud.b {
+    top: 34%;
+    left: -700px;
 
-    animation-duration: 45s;
-    animation-delay: -15s;
+    animation-duration: 58s;
+    animation-delay: -25s;
 }
 
-@keyframes cloudMove {
-
+@keyframes clouds {
     from {
         transform: translateX(0);
     }
 
     to {
-        transform: translateX(150vw);
+        transform: translateX(160vw);
     }
-
 }
 
-/* STARS */
+/* =========================
+   STARS
+========================= */
 
-.stars {
+#stars {
     position: absolute;
     inset: 0;
 }
@@ -137,292 +140,475 @@ body {
 
     border-radius: 50%;
 
-    background: #dffff2;
+    background: #d8fff0;
 
     box-shadow:
-        0 0 7px rgba(170,255,225,.7);
+        0 0 7px rgba(160,255,220,.7);
 
-    animation: twinkle 3s ease-in-out infinite;
+    animation: starPulse 4s ease-in-out infinite;
 }
 
-@keyframes twinkle {
-
+@keyframes starPulse {
     0%,100% {
-        opacity: .15;
+        opacity: .1;
     }
 
     50% {
         opacity: .8;
     }
-
 }
 
-/* HILLS */
+/* =========================
+   DISTANT MOUNTAIN
+========================= */
 
-.hill-back {
+.mountain {
     position: absolute;
 
+    bottom: 23%;
     left: -10%;
-    bottom: 14%;
 
     width: 120%;
-    height: 40%;
+    height: 35%;
 
     background:
         linear-gradient(
-            180deg,
-            #063a29,
-            #021b13
+            150deg,
+            transparent 35%,
+            #03130e 36%,
+            #03130e 60%,
+            transparent 61%
         );
+
+    opacity: .75;
+}
+
+/* =========================
+   GIANT HILL
+========================= */
+
+.hill {
+    position: absolute;
+
+    bottom: -25%;
+    left: -15%;
+
+    width: 130%;
+    height: 60%;
 
     border-radius: 50% 50% 0 0;
 
-    transform: rotate(-2deg);
-}
-
-.hill-front {
-    position: absolute;
-
-    left: -10%;
-    bottom: -12%;
-
-    width: 120%;
-    height: 43%;
-
     background:
-        linear-gradient(
-            180deg,
-            #03291d,
-            #010d09
+        radial-gradient(
+            ellipse at 50% 10%,
+            #0a4933 0%,
+            #063323 30%,
+            #031b12 62%,
+            #010a07 100%
         );
 
-    border-radius: 55% 55% 0 0;
-
-    transform: rotate(2deg);
+    box-shadow:
+        0 -25px 70px rgba(0,255,170,.06);
 }
 
-/* CASTLE */
+/* =========================
+   CASTLE
+========================= */
 
 .castle {
     position: absolute;
 
-    bottom: 27%;
-    left: 50%;
+    width: 760px;
+    height: 430px;
 
-    width: 430px;
-    height: 260px;
+    left: 50%;
+    bottom: 29%;
 
     transform: translateX(-50%);
 
     filter:
-        drop-shadow(0 20px 25px rgba(0,0,0,.65))
-        drop-shadow(0 0 20px rgba(0,255,170,.06));
+        drop-shadow(0 25px 35px rgba(0,0,0,.85))
+        drop-shadow(0 0 35px rgba(0,255,170,.05));
 }
 
-/* MAIN CASTLE BODY */
+/* Castle body */
 
-.keep {
+.building {
     position: absolute;
 
-    left: 105px;
+    left: 130px;
     bottom: 0;
 
-    width: 220px;
-    height: 150px;
+    width: 500px;
+    height: 190px;
 
     background:
         linear-gradient(
             90deg,
-            #0a1713,
-            #14251e,
-            #07100d
+            #08100d,
+            #18231d 45%,
+            #0a110e
         );
 
-    border: 2px solid rgba(170,220,200,.12);
+    clip-path: polygon(
+        0 18%,
+        8% 18%,
+        8% 10%,
+        18% 10%,
+        18% 18%,
+        32% 18%,
+        32% 5%,
+        45% 5%,
+        45% 18%,
+        60% 18%,
+        60% 9%,
+        72% 9%,
+        72% 18%,
+        86% 18%,
+        86% 7%,
+        100% 7%,
+        100% 100%,
+        0 100%
+    );
+
+    border: 1px solid rgba(180,220,205,.1);
 }
 
-/* TOWERS */
+/* =========================
+   TOWERS
+========================= */
 
 .tower {
     position: absolute;
 
     bottom: 0;
 
-    width: 70px;
-    height: 205px;
+    width: 82px;
 
     background:
         linear-gradient(
             90deg,
-            #07100d,
-            #182820,
-            #060c09
+            #050b08,
+            #18231d 50%,
+            #060b09
         );
 
-    border: 2px solid rgba(180,220,205,.12);
+    border: 1px solid rgba(190,225,210,.12);
 }
 
-.tower.left {
-    left: 45px;
+/* Individual tower sizes */
+
+.t1 {
+    left: 30px;
+    height: 275px;
 }
 
-.tower.right {
-    right: 45px;
+.t2 {
+    left: 105px;
+    height: 345px;
 }
 
-/* CENTER TOWER */
+.t3 {
+    left: 250px;
+    height: 395px;
+    width: 95px;
+}
 
-.tower.center {
+.t4 {
+    right: 120px;
+    height: 315px;
+}
+
+.t5 {
+    right: 35px;
+    height: 255px;
+}
+
+.t6 {
+    left: 390px;
+    height: 285px;
     width: 75px;
-    height: 235px;
-
-    left: 177px;
 }
 
-/* TOWER TOPS */
+/* =========================
+   SPIRES
+========================= */
 
-.roof {
+.spire {
     position: absolute;
 
-    top: -65px;
-    left: -15px;
+    left: 50%;
+    top: -105px;
 
-    width: 100px;
-    height: 80px;
+    width: 0;
+    height: 0;
+
+    transform: translateX(-50%);
+
+    border-left: 47px solid transparent;
+    border-right: 47px solid transparent;
+    border-bottom: 110px solid #101c17;
+
+    filter:
+        drop-shadow(0 4px 4px rgba(0,0,0,.8));
+}
+
+.spire::after {
+    content: "";
+
+    position: absolute;
+
+    left: -2px;
+    top: 5px;
+
+    width: 4px;
+    height: 28px;
+
+    background: #687d72;
+}
+
+/* Different spire sizes */
+
+.t2 .spire {
+    border-left-width: 43px;
+    border-right-width: 43px;
+    border-bottom-width: 105px;
+}
+
+.t3 .spire {
+    top: -145px;
+
+    border-left-width: 54px;
+    border-right-width: 54px;
+    border-bottom-width: 150px;
+}
+
+.t4 .spire {
+    top: -120px;
+
+    border-left-width: 46px;
+    border-right-width: 46px;
+    border-bottom-width: 125px;
+}
+
+.t5 .spire {
+    top: -95px;
+
+    border-left-width: 43px;
+    border-right-width: 43px;
+    border-bottom-width: 100px;
+}
+
+.t6 .spire {
+    top: -110px;
+
+    border-left-width: 40px;
+    border-right-width: 40px;
+    border-bottom-width: 115px;
+}
+
+/* =========================
+   BATTLEMENTS
+========================= */
+
+.tower::before {
+    content: "";
+
+    position: absolute;
+
+    left: -5px;
+    right: -5px;
+    top: -12px;
+
+    height: 17px;
 
     background:
-        linear-gradient(
-            135deg,
-            #081510,
-            #1b3026
+        repeating-linear-gradient(
+            90deg,
+            #111c17 0px,
+            #111c17 13px,
+            transparent 13px,
+            transparent 23px
         );
-
-    clip-path: polygon(
-        50% 0,
-        100% 100%,
-        0 100%
-    );
 }
 
-/* SIDE ROOFS */
-
-.tower .roof {
-    left: -15px;
-}
-
-/* WINDOWS */
+/* =========================
+   WINDOWS
+========================= */
 
 .window {
     position: absolute;
 
-    width: 13px;
-    height: 30px;
+    width: 12px;
+    height: 28px;
 
-    border-radius: 50% 50% 5px 5px;
+    border-radius: 50% 50% 4px 4px;
 
     background:
         linear-gradient(
-            180deg,
-            #8affca,
-            #164c37
+            to bottom,
+            #b8ffdc,
+            #245d43
         );
 
     box-shadow:
-        0 0 12px rgba(50,255,170,.25);
+        0 0 12px rgba(80,255,175,.3);
 
-    opacity: .8;
+    opacity: .65;
 }
 
 .tower .window {
-    left: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tower .window.w1 {
     top: 70px;
 }
 
-.center .window {
-    left: 31px;
-    top: 65px;
+.tower .window.w2 {
+    top: 125px;
 }
 
-/* CASTLE WINDOWS */
-
-.keep .window {
-    left: 35px;
-    top: 45px;
+.tower .window.w3 {
+    top: 180px;
 }
 
-.keep .window:nth-child(2) {
-    left: 105px;
+.tower .window.w4 {
+    top: 235px;
 }
 
-.keep .window:nth-child(3) {
-    left: 175px;
+/* Castle body windows */
+
+.building .window {
+    top: 75px;
 }
 
-/* DOOR */
+.building .window.a {
+    left: 170px;
+}
+
+.building .window.b {
+    left: 240px;
+}
+
+.building .window.c {
+    left: 310px;
+}
+
+.building .window.d {
+    left: 380px;
+}
+
+/* =========================
+   MAIN DOOR
+========================= */
 
 .door {
     position: absolute;
 
     bottom: 0;
-    left: 91px;
+    left: 48%;
 
-    width: 38px;
-    height: 65px;
+    width: 48px;
+    height: 83px;
 
-    border-radius: 22px 22px 0 0;
+    border-radius: 28px 28px 0 0;
 
-    background: #020705;
+    background:
+        linear-gradient(
+            90deg,
+            #020605,
+            #0b1510,
+            #020605
+        );
 
-    border: 1px solid rgba(170,255,220,.12);
+    border: 1px solid rgba(180,220,205,.1);
 }
 
-/* FLAGS */
+/* =========================
+   FLAGS
+========================= */
 
-.flag {
+.flagpole {
     position: absolute;
 
-    top: -67px;
+    top: -155px;
+    left: 50%;
 
-    width: 3px;
-    height: 65px;
+    width: 2px;
+    height: 100px;
 
-    background: #6f9183;
+    background: #667b70;
 }
 
-.flag::after {
+.flagpole::after {
     content: "";
 
     position: absolute;
 
-    top: 0;
+    top: 2px;
     left: 2px;
 
-    width: 28px;
-    height: 20px;
+    width: 40px;
+    height: 25px;
 
-    background: #0a4a34;
+    background:
+        linear-gradient(
+            135deg,
+            #064d35,
+            #0b2d21
+        );
 
     clip-path: polygon(
         0 0,
-        100% 20%,
-        80% 100%,
-        0 80%
+        100% 15%,
+        78% 50%,
+        100% 85%,
+        0 100%
     );
 }
 
-.tower.left .flag {
-    left: 34px;
+/* =========================
+   MIST
+========================= */
+
+.mist {
+    position: absolute;
+
+    bottom: 20%;
+    left: -10%;
+
+    width: 120%;
+    height: 100px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(125,205,175,.12),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    animation: mistMove 12s ease-in-out infinite alternate;
 }
 
-.tower.right .flag {
-    left: 34px;
+@keyframes mistMove {
+
+    from {
+        transform: translateX(-4%);
+    }
+
+    to {
+        transform: translateX(4%);
+    }
+
 }
 
-.center .flag {
-    left: 36px;
-}
-
-/* RAIN */
+/* =========================
+   RAIN
+========================= */
 
 #rain {
     position: fixed;
@@ -430,62 +616,64 @@ body {
 
     pointer-events: none;
 
-    z-index: 20;
+    z-index: 50;
 }
 
-.raindrop {
+.drop {
     position: absolute;
 
     top: -30px;
 
     width: 1px;
-    height: 18px;
 
     background:
         linear-gradient(
             transparent,
-            rgba(180,255,230,.55)
+            rgba(185,255,230,.6)
         );
 
-    transform: rotate(12deg);
+    transform: rotate(13deg);
 
-    animation: rainFall linear infinite;
+    animation:
+        fall linear infinite;
 }
 
-@keyframes rainFall {
+@keyframes fall {
 
     to {
         transform:
-            translate(
-                -100px,
-                115vh
-            )
-            rotate(12deg);
+            translate(-120px,115vh)
+            rotate(13deg);
     }
 
 }
 
-/* GLASS OVERLAY */
+/* =========================
+   GLASS
+========================= */
 
 .glass {
     position: fixed;
     inset: 0;
 
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            transparent 35%,
-            rgba(0,0,0,.28) 100%
-        );
-
-    backdrop-filter: blur(.4px);
-
     pointer-events: none;
 
-    z-index: 30;
+    z-index: 80;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(0,0,0,.38) 100%
+        );
+
+    box-shadow:
+        inset 0 0 120px rgba(0,0,0,.45);
 }
 
-/* TITLE */
+/* =========================
+   TITLE
+========================= */
 
 .title {
     position: absolute;
@@ -495,61 +683,55 @@ body {
 
     transform: translateX(-50%);
 
+    z-index: 90;
+
     text-align: center;
 
-    z-index: 40;
-
-    letter-spacing: 5px;
-
-    color: rgba(230,255,245,.82);
+    color: rgba(226,255,242,.82);
 
     text-shadow:
-        0 0 25px rgba(0,255,170,.15);
+        0 0 30px rgba(0,255,170,.1);
 }
 
 .title h1 {
     margin: 0;
 
-    font-size: clamp(
-        35px,
-        6vw,
-        75px
-    );
+    font-size: clamp(40px,6vw,76px);
 
     font-weight: 500;
+
+    letter-spacing: 6px;
 }
 
 .title p {
-    margin-top: 5px;
+    margin: 3px 0 0;
 
-    font-size: 15px;
+    font-size: 14px;
 
-    letter-spacing: 7px;
+    letter-spacing: 8px;
 
-    opacity: .45;
+    opacity: .42;
 }
 
-/* CLOCK */
+/* =========================
+   CLOCK
+========================= */
 
 .clock {
     position: absolute;
 
-    bottom: 7%;
+    bottom: 6%;
     left: 50%;
 
     transform: translateX(-50%);
 
-    z-index: 40;
+    z-index: 90;
 
-    font-size: clamp(
-        28px,
-        4vw,
-        50px
-    );
+    font-size: clamp(28px,4vw,50px);
 
     letter-spacing: 4px;
 
-    color: rgba(230,255,245,.65);
+    color: rgba(225,255,242,.65);
 }
 
 </style>
@@ -559,135 +741,164 @@ body {
 
 <div class="sky"></div>
 
-<div class="stars" id="stars"></div>
+<div id="stars"></div>
 
 <div class="moon"></div>
 
-<div class="cloud one"></div>
-<div class="cloud two"></div>
+<div class="cloud a"></div>
+<div class="cloud b"></div>
 
-<div class="hill-back"></div>
-<div class="hill-front"></div>
+<div class="mountain"></div>
 
 <!-- CASTLE -->
 
 <div class="castle">
 
-    <div class="tower left">
-        <div class="roof"></div>
-        <div class="window"></div>
-        <div class="flag"></div>
-    </div>
+    <div class="building">
 
-    <div class="keep">
-
-        <div class="window"></div>
-        <div class="window"></div>
-        <div class="window"></div>
+        <div class="window a"></div>
+        <div class="window b"></div>
+        <div class="window c"></div>
+        <div class="window d"></div>
 
         <div class="door"></div>
 
     </div>
 
-    <div class="tower center">
-        <div class="roof"></div>
-        <div class="window"></div>
-        <div class="flag"></div>
+    <div class="tower t1">
+        <div class="spire"></div>
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+        <div class="flagpole"></div>
     </div>
 
-    <div class="tower right">
-        <div class="roof"></div>
-        <div class="window"></div>
-        <div class="flag"></div>
+    <div class="tower t2">
+        <div class="spire"></div>
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+        <div class="window w3"></div>
+        <div class="flagpole"></div>
+    </div>
+
+    <div class="tower t3">
+        <div class="spire"></div>
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+        <div class="window w3"></div>
+        <div class="window w4"></div>
+        <div class="flagpole"></div>
+    </div>
+
+    <div class="tower t4">
+        <div class="spire"></div>
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+        <div class="window w3"></div>
+        <div class="flagpole"></div>
+    </div>
+
+    <div class="tower t5">
+        <div class="spire"></div>
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+        <div class="flagpole"></div>
+    </div>
+
+    <div class="tower t6">
+        <div class="spire"></div>
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+        <div class="window w3"></div>
     </div>
 
 </div>
 
-<!-- RAIN -->
+<div class="hill"></div>
+
+<div class="mist"></div>
 
 <div id="rain"></div>
 
 <div class="title">
-
     <h1>Emerald</h1>
-
-    <p>ALEGREYA • LIVE WALLPAPER</p>
-
+    <p>ALEGREYA</p>
 </div>
 
-<div class="clock" id="clock">
-    00:00
-</div>
+<div class="clock" id="clock"></div>
 
 <div class="glass"></div>
 
 <script>
 
-/* STARS */
+/* =========================
+   STARS
+========================= */
 
 const stars = document.getElementById("stars");
 
-for (let i = 0; i < 70; i++) {
+for (let i = 0; i < 75; i++) {
 
-    const star = document.createElement("div");
+    const s = document.createElement("div");
 
-    star.className = "star";
+    s.className = "star";
 
-    star.style.left =
+    s.style.left =
         Math.random() * 100 + "%";
 
-    star.style.top =
+    s.style.top =
         Math.random() * 55 + "%";
 
-    star.style.animationDelay =
-        Math.random() * 5 + "s";
+    s.style.animationDelay =
+        Math.random() * 4 + "s";
 
-    stars.appendChild(star);
-
+    stars.appendChild(s);
 }
 
-/* RAIN */
+/* =========================
+   RAIN
+========================= */
 
 const rain = document.getElementById("rain");
 
-for (let i = 0; i < 110; i++) {
+for (let i = 0; i < 100; i++) {
 
-    const drop =
-        document.createElement("div");
+    const r = document.createElement("div");
 
-    drop.className = "raindrop";
+    r.className = "drop";
 
-    drop.style.left =
+    r.style.left =
         Math.random() * 110 + "%";
 
-    drop.style.animationDuration =
-        (0.7 + Math.random() * 0.8) + "s";
+    r.style.height =
+        (10 + Math.random() * 20) + "px";
 
-    drop.style.animationDelay =
+    r.style.opacity =
+        .15 + Math.random() * .5;
+
+    r.style.animationDuration =
+        (.65 + Math.random() * .8) + "s";
+
+    r.style.animationDelay =
         (-Math.random() * 2) + "s";
 
-    drop.style.opacity =
-        0.15 + Math.random() * 0.55;
-
-    rain.appendChild(drop);
-
+    rain.appendChild(r);
 }
 
-/* CLOCK */
+/* =========================
+   CLOCK
+========================= */
 
-function updateClock() {
+function clock() {
 
     const now = new Date();
 
     let h = now.getHours();
 
-    const m = String(
-        now.getMinutes()
-    ).padStart(2, "0");
+    const m =
+        String(now.getMinutes()).padStart(2,"0");
 
-    const s = String(
-        now.getSeconds()
-    ).padStart(2, "0");
+    const s =
+        String(now.getSeconds()).padStart(2,"0");
 
     const ampm =
         h >= 12 ? "PM" : "AM";
@@ -697,32 +908,29 @@ function updateClock() {
     document.getElementById("clock")
         .textContent =
         `${String(h).padStart(2,"0")}:${m}:${s} ${ampm}`;
-
 }
 
-updateClock();
+clock();
 
-setInterval(updateClock, 1000);
+setInterval(clock,1000);
 
-/* DOUBLE CLICK = FULLSCREEN */
+/* =========================
+   DOUBLE CLICK FULLSCREEN
+========================= */
 
-document.addEventListener(
-    "dblclick",
-    () => {
+document.addEventListener("dblclick", () => {
 
-        if (!document.fullscreenElement) {
+    if (!document.fullscreenElement) {
 
-            document.documentElement
-                .requestFullscreen();
+        document.documentElement.requestFullscreen();
 
-        } else {
+    } else {
 
-            document.exitFullscreen();
-
-        }
+        document.exitFullscreen();
 
     }
-);
+
+});
 
 </script>
 
