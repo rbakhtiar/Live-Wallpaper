@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerald Glass Live Wallpaper</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    background: #020806;
+    color: white;
+}
+
+body {
+    position: relative;
+}
+
+/* Deep emerald background */
+.background {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(0, 255, 170, .18), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(0, 180, 130, .13), transparent 32%),
+        radial-gradient(circle at 50% 90%, rgba(0, 255, 150, .12), transparent 35%),
+        linear-gradient(135deg, #010504, #03140f 50%, #010806);
+    z-index: -5;
+}
+
+/* Moving glow blobs */
+.glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .28;
+    mix-blend-mode: screen;
+}
+
+.glow.one {
+    background: #00ff9d;
+    top: -160px;
+    left: -100px;
+    animation: floatOne 14s ease-in-out infinite alternate;
+}
+
+.glow.two {
+    background: #008f68;
+    right: -150px;
+    top: 20%;
+    animation: floatTwo 18s ease-in-out infinite alternate;
+}
+
+.glow.three {
+    background: #00c98b;
+    bottom: -200px;
+    left: 35%;
+    animation: floatThree 16s ease-in-out infinite alternate;
+}
+
+@keyframes floatOne {
+    to {
+        transform: translate(220px, 170px) scale(1.2);
+    }
+}
+
+@keyframes floatTwo {
+    to {
+        transform: translate(-180px, 180px) scale(1.3);
+    }
+}
+
+@keyframes floatThree {
+    to {
+        transform: translate(100px, -150px) scale(1.2);
+    }
+}
+
+/* Glass layer */
+.glass {
+    position: absolute;
+    inset: 7%;
+    border: 1px solid rgba(150, 255, 220, .14);
+    border-radius: 35px;
+    background: rgba(5, 30, 23, .18);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.08),
+        0 30px 100px rgba(0,0,0,.45);
+}
+
+/* Floating particles */
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(170,255,225,.7);
+    box-shadow: 0 0 12px rgba(0,255,170,.7);
+    animation: rise linear infinite;
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    85% {
+        opacity: .5;
+    }
+
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* Main content */
+.content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 5;
+}
+
+.logo {
+    font-size: clamp(50px, 9vw, 110px);
+    font-weight: 500;
+    letter-spacing: -4px;
+    background: linear-gradient(
+        120deg,
+        #ffffff,
+        #b8ffe7,
+        #55ffc2,
+        #ffffff
+    );
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shine 7s linear infinite;
+    text-shadow: 0 0 40px rgba(0,255,170,.12);
+}
+
+@keyframes shine {
+    to {
+        background-position: 250% center;
+    }
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: clamp(14px, 2vw, 20px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(210,255,240,.6);
+}
+
+/* Clock */
+.clock {
+    margin-top: 35px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(28px, 5vw, 55px);
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: rgba(240,255,250,.9);
+}
+
+.date {
+    margin-top: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: rgba(190,240,225,.5);
+}
+
+/* Glass reflection */
+.reflection {
+    position: absolute;
+    width: 70%;
+    height: 1px;
+    top: 15%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(200,255,240,.22),
+        transparent
+    );
+    filter: blur(1px);
+    animation: reflectionMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes reflectionMove {
+    from {
+        transform: translateX(-12%);
+        opacity: .25;
+    }
+
+    to {
+        transform: translateX(12%);
+        opacity: .7;
+    }
+}
+
+/* Fullscreen hint */
+.hint {
+    position: absolute;
+    bottom: 25px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(200,255,235,.3);
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="glow one"></div>
+<div class="glow two"></div>
+<div class="glow three"></div>
+
+<div class="glass"></div>
+
+<div id="particles"></div>
+
+<div class="reflection"></div>
+
+<div class="content">
+    <div class="logo">EMERALD</div>
+
+    <div class="subtitle">
+        Aqua Glass
+    </div>
+
+    <div class="clock" id="clock">
+        00:00
+    </div>
+
+    <div class="date" id="date">
+        LOADING
+    </div>
+</div>
+
+<div class="hint">
+    LIVE • GLASS • EMERALD
+</div>
+
+<script>
+/* Create lightweight particles */
+const particleContainer = document.getElementById("particles");
+
+for (let i = 0; i < 35; i++) {
+    const particle = document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDuration =
+        (8 + Math.random() * 15) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random() * 20) + "s";
+
+    const size = 1 + Math.random() * 3;
+
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+
+    particleContainer.appendChild(particle);
+}
+
+/* Live clock */
+function updateClock() {
+    const now = new Date();
+
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12;
+    hours = hours || 12;
+
+    document.getElementById("clock").textContent =
+        `${String(hours).padStart(2, "0")}:${minutes}:${seconds} ${ampm}`;
+
+    document.getElementById("date").textContent =
+        now.toLocaleDateString(undefined, {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        }).toUpperCase();
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+/* Double-click for fullscreen */
+document.addEventListener("dblclick", () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+});
+</script>
+
+</body>
+</html>
