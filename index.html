@@ -3,336 +3,727 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emerald Glass Live Wallpaper</title>
+
+<title>Emerald Castle — Live Wallpaper</title>
+
+<!-- Alegreya Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: Georgia, "Times New Roman", serif;
-    background: #020806;
-    color: white;
 }
 
 body {
-    position: relative;
+    font-family: "Alegreya", Georgia, serif;
+    background: #010605;
+    color: #eafff5;
 }
 
-/* Deep emerald background */
-.background {
+/* NIGHT SKY */
+
+.sky {
     position: fixed;
     inset: 0;
+
     background:
-        radial-gradient(circle at 20% 20%, rgba(0, 255, 170, .18), transparent 30%),
-        radial-gradient(circle at 80% 30%, rgba(0, 180, 130, .13), transparent 32%),
-        radial-gradient(circle at 50% 90%, rgba(0, 255, 150, .12), transparent 35%),
-        linear-gradient(135deg, #010504, #03140f 50%, #010806);
-    z-index: -5;
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(15, 91, 67, 0.25),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            #010504 0%,
+            #02120d 48%,
+            #031c14 100%
+        );
 }
 
-/* Moving glow blobs */
-.glow {
+/* MOON */
+
+.moon {
     position: absolute;
-    width: 420px;
-    height: 420px;
+
+    width: 150px;
+    height: 150px;
+
+    right: 13%;
+    top: 13%;
+
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: .28;
-    mix-blend-mode: screen;
-}
 
-.glow.one {
-    background: #00ff9d;
-    top: -160px;
-    left: -100px;
-    animation: floatOne 14s ease-in-out infinite alternate;
-}
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #f4fff9,
+            #cfeee0 55%,
+            #8eb8a6
+        );
 
-.glow.two {
-    background: #008f68;
-    right: -150px;
-    top: 20%;
-    animation: floatTwo 18s ease-in-out infinite alternate;
-}
-
-.glow.three {
-    background: #00c98b;
-    bottom: -200px;
-    left: 35%;
-    animation: floatThree 16s ease-in-out infinite alternate;
-}
-
-@keyframes floatOne {
-    to {
-        transform: translate(220px, 170px) scale(1.2);
-    }
-}
-
-@keyframes floatTwo {
-    to {
-        transform: translate(-180px, 180px) scale(1.3);
-    }
-}
-
-@keyframes floatThree {
-    to {
-        transform: translate(100px, -150px) scale(1.2);
-    }
-}
-
-/* Glass layer */
-.glass {
-    position: absolute;
-    inset: 7%;
-    border: 1px solid rgba(150, 255, 220, .14);
-    border-radius: 35px;
-    background: rgba(5, 30, 23, .18);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
     box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.08),
-        0 30px 100px rgba(0,0,0,.45);
+        0 0 35px rgba(190,255,230,.18),
+        0 0 100px rgba(0,255,170,.08);
+
+    opacity: .82;
 }
 
-/* Floating particles */
-#particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-}
+/* CLOUDS */
 
-.particle {
+.cloud {
     position: absolute;
-    width: 3px;
-    height: 3px;
+
+    width: 420px;
+    height: 100px;
+
+    background: rgba(8, 35, 27, .5);
+
+    filter: blur(20px);
+
     border-radius: 50%;
-    background: rgba(170,255,225,.7);
-    box-shadow: 0 0 12px rgba(0,255,170,.7);
-    animation: rise linear infinite;
+
+    animation: cloudMove 30s linear infinite;
 }
 
-@keyframes rise {
+.cloud.one {
+    top: 22%;
+    left: -450px;
+}
+
+.cloud.two {
+    top: 38%;
+    left: -600px;
+
+    animation-duration: 45s;
+    animation-delay: -15s;
+}
+
+@keyframes cloudMove {
+
     from {
-        transform: translateY(110vh);
-        opacity: 0;
+        transform: translateX(0);
     }
 
-    15% {
+    to {
+        transform: translateX(150vw);
+    }
+
+}
+
+/* STARS */
+
+.stars {
+    position: absolute;
+    inset: 0;
+}
+
+.star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: #dffff2;
+
+    box-shadow:
+        0 0 7px rgba(170,255,225,.7);
+
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+
+    0%,100% {
+        opacity: .15;
+    }
+
+    50% {
         opacity: .8;
     }
 
-    85% {
-        opacity: .5;
-    }
-
-    to {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
 }
 
-/* Main content */
-.content {
+/* HILLS */
+
+.hill-back {
     position: absolute;
+
+    left: -10%;
+    bottom: 14%;
+
+    width: 120%;
+    height: 40%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #063a29,
+            #021b13
+        );
+
+    border-radius: 50% 50% 0 0;
+
+    transform: rotate(-2deg);
+}
+
+.hill-front {
+    position: absolute;
+
+    left: -10%;
+    bottom: -12%;
+
+    width: 120%;
+    height: 43%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #03291d,
+            #010d09
+        );
+
+    border-radius: 55% 55% 0 0;
+
+    transform: rotate(2deg);
+}
+
+/* CASTLE */
+
+.castle {
+    position: absolute;
+
+    bottom: 27%;
+    left: 50%;
+
+    width: 430px;
+    height: 260px;
+
+    transform: translateX(-50%);
+
+    filter:
+        drop-shadow(0 20px 25px rgba(0,0,0,.65))
+        drop-shadow(0 0 20px rgba(0,255,170,.06));
+}
+
+/* MAIN CASTLE BODY */
+
+.keep {
+    position: absolute;
+
+    left: 105px;
+    bottom: 0;
+
+    width: 220px;
+    height: 150px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0a1713,
+            #14251e,
+            #07100d
+        );
+
+    border: 2px solid rgba(170,220,200,.12);
+}
+
+/* TOWERS */
+
+.tower {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 70px;
+    height: 205px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #07100d,
+            #182820,
+            #060c09
+        );
+
+    border: 2px solid rgba(180,220,205,.12);
+}
+
+.tower.left {
+    left: 45px;
+}
+
+.tower.right {
+    right: 45px;
+}
+
+/* CENTER TOWER */
+
+.tower.center {
+    width: 75px;
+    height: 235px;
+
+    left: 177px;
+}
+
+/* TOWER TOPS */
+
+.roof {
+    position: absolute;
+
+    top: -65px;
+    left: -15px;
+
+    width: 100px;
+    height: 80px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #081510,
+            #1b3026
+        );
+
+    clip-path: polygon(
+        50% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+/* SIDE ROOFS */
+
+.tower .roof {
+    left: -15px;
+}
+
+/* WINDOWS */
+
+.window {
+    position: absolute;
+
+    width: 13px;
+    height: 30px;
+
+    border-radius: 50% 50% 5px 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8affca,
+            #164c37
+        );
+
+    box-shadow:
+        0 0 12px rgba(50,255,170,.25);
+
+    opacity: .8;
+}
+
+.tower .window {
+    left: 28px;
+    top: 70px;
+}
+
+.center .window {
+    left: 31px;
+    top: 65px;
+}
+
+/* CASTLE WINDOWS */
+
+.keep .window {
+    left: 35px;
+    top: 45px;
+}
+
+.keep .window:nth-child(2) {
+    left: 105px;
+}
+
+.keep .window:nth-child(3) {
+    left: 175px;
+}
+
+/* DOOR */
+
+.door {
+    position: absolute;
+
+    bottom: 0;
+    left: 91px;
+
+    width: 38px;
+    height: 65px;
+
+    border-radius: 22px 22px 0 0;
+
+    background: #020705;
+
+    border: 1px solid rgba(170,255,220,.12);
+}
+
+/* FLAGS */
+
+.flag {
+    position: absolute;
+
+    top: -67px;
+
+    width: 3px;
+    height: 65px;
+
+    background: #6f9183;
+}
+
+.flag::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 2px;
+
+    width: 28px;
+    height: 20px;
+
+    background: #0a4a34;
+
+    clip-path: polygon(
+        0 0,
+        100% 20%,
+        80% 100%,
+        0 80%
+    );
+}
+
+.tower.left .flag {
+    left: 34px;
+}
+
+.tower.right .flag {
+    left: 34px;
+}
+
+.center .flag {
+    left: 36px;
+}
+
+/* RAIN */
+
+#rain {
+    position: fixed;
     inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+.raindrop {
+    position: absolute;
+
+    top: -30px;
+
+    width: 1px;
+    height: 18px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(180,255,230,.55)
+        );
+
+    transform: rotate(12deg);
+
+    animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+
+    to {
+        transform:
+            translate(
+                -100px,
+                115vh
+            )
+            rotate(12deg);
+    }
+
+}
+
+/* GLASS OVERLAY */
+
+.glass {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            transparent 35%,
+            rgba(0,0,0,.28) 100%
+        );
+
+    backdrop-filter: blur(.4px);
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+/* TITLE */
+
+.title {
+    position: absolute;
+
+    top: 7%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
     text-align: center;
-    z-index: 5;
-}
 
-.logo {
-    font-size: clamp(50px, 9vw, 110px);
-    font-weight: 500;
-    letter-spacing: -4px;
-    background: linear-gradient(
-        120deg,
-        #ffffff,
-        #b8ffe7,
-        #55ffc2,
-        #ffffff
-    );
-    background-size: 250% auto;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: shine 7s linear infinite;
-    text-shadow: 0 0 40px rgba(0,255,170,.12);
-}
+    z-index: 40;
 
-@keyframes shine {
-    to {
-        background-position: 250% center;
-    }
-}
-
-.subtitle {
-    margin-top: 10px;
-    font-size: clamp(14px, 2vw, 20px);
     letter-spacing: 5px;
-    text-transform: uppercase;
-    color: rgba(210,255,240,.6);
+
+    color: rgba(230,255,245,.82);
+
+    text-shadow:
+        0 0 25px rgba(0,255,170,.15);
 }
 
-/* Clock */
-.clock {
-    margin-top: 35px;
-    font-family: Arial, sans-serif;
-    font-size: clamp(28px, 5vw, 55px);
-    font-weight: 300;
-    letter-spacing: 3px;
-    color: rgba(240,255,250,.9);
-}
+.title h1 {
+    margin: 0;
 
-.date {
-    margin-top: 8px;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: rgba(190,240,225,.5);
-}
-
-/* Glass reflection */
-.reflection {
-    position: absolute;
-    width: 70%;
-    height: 1px;
-    top: 15%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(200,255,240,.22),
-        transparent
+    font-size: clamp(
+        35px,
+        6vw,
+        75px
     );
-    filter: blur(1px);
-    animation: reflectionMove 8s ease-in-out infinite alternate;
+
+    font-weight: 500;
 }
 
-@keyframes reflectionMove {
-    from {
-        transform: translateX(-12%);
-        opacity: .25;
-    }
+.title p {
+    margin-top: 5px;
 
-    to {
-        transform: translateX(12%);
-        opacity: .7;
-    }
+    font-size: 15px;
+
+    letter-spacing: 7px;
+
+    opacity: .45;
 }
 
-/* Fullscreen hint */
-.hint {
+/* CLOCK */
+
+.clock {
     position: absolute;
-    bottom: 25px;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(200,255,235,.3);
+
+    bottom: 7%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 40;
+
+    font-size: clamp(
+        28px,
+        4vw,
+        50px
+    );
+
+    letter-spacing: 4px;
+
+    color: rgba(230,255,245,.65);
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="background"></div>
+<div class="sky"></div>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
-<div class="glow three"></div>
+<div class="stars" id="stars"></div>
+
+<div class="moon"></div>
+
+<div class="cloud one"></div>
+<div class="cloud two"></div>
+
+<div class="hill-back"></div>
+<div class="hill-front"></div>
+
+<!-- CASTLE -->
+
+<div class="castle">
+
+    <div class="tower left">
+        <div class="roof"></div>
+        <div class="window"></div>
+        <div class="flag"></div>
+    </div>
+
+    <div class="keep">
+
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+
+        <div class="door"></div>
+
+    </div>
+
+    <div class="tower center">
+        <div class="roof"></div>
+        <div class="window"></div>
+        <div class="flag"></div>
+    </div>
+
+    <div class="tower right">
+        <div class="roof"></div>
+        <div class="window"></div>
+        <div class="flag"></div>
+    </div>
+
+</div>
+
+<!-- RAIN -->
+
+<div id="rain"></div>
+
+<div class="title">
+
+    <h1>Emerald</h1>
+
+    <p>ALEGREYA • LIVE WALLPAPER</p>
+
+</div>
+
+<div class="clock" id="clock">
+    00:00
+</div>
 
 <div class="glass"></div>
 
-<div id="particles"></div>
-
-<div class="reflection"></div>
-
-<div class="content">
-    <div class="logo">EMERALD</div>
-
-    <div class="subtitle">
-        Aqua Glass
-    </div>
-
-    <div class="clock" id="clock">
-        00:00
-    </div>
-
-    <div class="date" id="date">
-        LOADING
-    </div>
-</div>
-
-<div class="hint">
-    LIVE • GLASS • EMERALD
-</div>
-
 <script>
-/* Create lightweight particles */
-const particleContainer = document.getElementById("particles");
 
-for (let i = 0; i < 35; i++) {
-    const particle = document.createElement("div");
+/* STARS */
 
-    particle.className = "particle";
+const stars = document.getElementById("stars");
 
-    particle.style.left = Math.random() * 100 + "%";
-    particle.style.animationDuration =
-        (8 + Math.random() * 15) + "s";
+for (let i = 0; i < 70; i++) {
 
-    particle.style.animationDelay =
-        (-Math.random() * 20) + "s";
+    const star = document.createElement("div");
 
-    const size = 1 + Math.random() * 3;
+    star.className = "star";
 
-    particle.style.width = size + "px";
-    particle.style.height = size + "px";
+    star.style.left =
+        Math.random() * 100 + "%";
 
-    particleContainer.appendChild(particle);
+    star.style.top =
+        Math.random() * 55 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    stars.appendChild(star);
+
 }
 
-/* Live clock */
+/* RAIN */
+
+const rain = document.getElementById("rain");
+
+for (let i = 0; i < 110; i++) {
+
+    const drop =
+        document.createElement("div");
+
+    drop.className = "raindrop";
+
+    drop.style.left =
+        Math.random() * 110 + "%";
+
+    drop.style.animationDuration =
+        (0.7 + Math.random() * 0.8) + "s";
+
+    drop.style.animationDelay =
+        (-Math.random() * 2) + "s";
+
+    drop.style.opacity =
+        0.15 + Math.random() * 0.55;
+
+    rain.appendChild(drop);
+
+}
+
+/* CLOCK */
+
 function updateClock() {
+
     const now = new Date();
 
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
+    let h = now.getHours();
 
-    const ampm = hours >= 12 ? "PM" : "AM";
+    const m = String(
+        now.getMinutes()
+    ).padStart(2, "0");
 
-    hours = hours % 12;
-    hours = hours || 12;
+    const s = String(
+        now.getSeconds()
+    ).padStart(2, "0");
 
-    document.getElementById("clock").textContent =
-        `${String(hours).padStart(2, "0")}:${minutes}:${seconds} ${ampm}`;
+    const ampm =
+        h >= 12 ? "PM" : "AM";
 
-    document.getElementById("date").textContent =
-        now.toLocaleDateString(undefined, {
-            weekday: "long",
-            month: "long",
-            day: "numeric",
-            year: "numeric"
-        }).toUpperCase();
+    h = h % 12 || 12;
+
+    document.getElementById("clock")
+        .textContent =
+        `${String(h).padStart(2,"0")}:${m}:${s} ${ampm}`;
+
 }
 
 updateClock();
+
 setInterval(updateClock, 1000);
 
-/* Double-click for fullscreen */
-document.addEventListener("dblclick", () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        document.exitFullscreen();
+/* DOUBLE CLICK = FULLSCREEN */
+
+document.addEventListener(
+    "dblclick",
+    () => {
+
+        if (!document.fullscreenElement) {
+
+            document.documentElement
+                .requestFullscreen();
+
+        } else {
+
+            document.exitFullscreen();
+
+        }
+
     }
-});
+);
+
 </script>
 
 </body>
